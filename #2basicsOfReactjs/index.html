@@ -1,0 +1,56 @@
+<!-- HARD WAY -->
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script>
+    //React.createElement(1."span", 2.span의 property, 3.span의 내용(content));
+    //1. span 말고도, 어떤 태그던지 가능! div, button 등등 유효한 HTML태그이기만 하면된다!
+    //2. span의 property는 class name, id, style 쌉가능
+    // const span = React.createElement("span",{id : "sexy-span", style:{color:"red"}},"Hello I'm a span");
+    const h3 = React.createElement("h3",{
+        //이전에 vanillaJS ver : mouseenter / ReactJS ver : onMouseEnter
+        //on 붙음으로 ReactJS에게 eventListener를 생성한다고 알려줄수있숨. 
+        id:"title",
+        onMouseEnter: () => console.log("mouse enter"),
+    },"Hello I'm a span");
+
+    const root = document.getElementById("root");
+    // ReactDOM.render(span, root);
+    //render(이것을,여기다가 위치(생성))하게 해줘!
+
+    //constant의 이름은 반드시 html태그 이름과 일치할 필요 xx!!!
+    //button.addEventListener("click",handleClick);와 같은 기능 만들고싶다!
+    const btn = React.createElement("button",{
+        //클릭시 호출될 function
+        style: {backgroundColor:"tomato"},
+        onClick: () => console.log('im clicked'),
+    },"Click me");
+   
+    // ReactDOM.render(btn,root); //root에 btn 생성하게 했둠!
+
+    // span, btn 다 render하고 싶다!!!배열만들어서 가능!
+    const container = React.createElement("div",null,[h3,btn]);
+    ReactDOM.render(container,root);
+
+</script>
+
+</html>
+
+<!--* ReactJS는 어플리케이션이 아주 interactive하도록 만들어주는 library, like engine,
+    react-dom은 library or package인데, 모든 React element들을 html body에 둘 수 있도록 해주는 역할.
+ 
+   * render의 의미 : React element를 가지고 HTML로 만들어 배치한다는 것. 사용자에게 보여준다.
+
+   * 바닐라 JS에서는 HTML=> JS로 가져와서 HTML을 수정하는 방식,
+    but, ReactJS는 모든 것이 JS로써 시작=>HTML
+
+    JS와 ReactJS를 사용하여 element생성 : 업뎃필요한 elememt를 업뎃함.
+    === React JS가 결과물인 HTML을 업뎃할 수 있다! = 유저에게 보여질 내용을 컨트롤 할 수 있다.
+
+    JS를 이용해 element를 생성했고, React JS가 그걸 HTML로 번역하는 것!!!
+
+-->
