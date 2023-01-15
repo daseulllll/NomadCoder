@@ -21,13 +21,24 @@
     }
 
     const Container = ()=>(
-                             //innerText와 기능 유사, 변수 연결해주는 것.
+                             //↓innerText와 기능 유사, 변수 연결해주는 것.
         <div>              
             <h3>Total clicks : {counter}</h3>
             <button onClick ={countUp} >Click me</button>
         </div>
     );
+
+    /* = function Container() {
+        return(
+                             //↓innerText와 기능 유사, 변수 연결해주는 것.
+        <div>              
+            <h3>Total clicks : {counter}</h3>
+            <button onClick ={countUp} >Click me</button>
+        </div>
+    );
+    }*/
+
     render();
 </script>
 </html>
-<!-- reateJS UI에서 바뀐부분만 업데이트, 생성함. -->
+<!-- reateJS : UI에서 바뀐부분만 업데이트, 생성함. -->

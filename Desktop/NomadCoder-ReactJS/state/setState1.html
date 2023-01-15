@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    
+    const root = document.getElementById("root");
+  
+    /* 리액트JS에서 데이터를 저장시켜 자동으로 리렌더링을 일으킬 수 있는 방법
+    let counter = 0;
+    function  countUp(){  
+    }  
+     = const data = React.useState();
+    △console.log(data);하면 
+    [undefined, f ] -> undefined와 함수가 적힌 배열이 나타남
+    (배열 첫번째 값은 초기값, 두번째 값은 그 값을 바꾸는 함수)
+    undefined는 data이고 f는 data를 바꿀 때 사용하는 함수
+    React.useState() 함수는 초기값을 설정할 수 있음
+    즉, undefined는 초기값이고 두 번째 요소인 f는 그 값을 바꾸는 함수
+
+
+
+     */
+
+    function App(){
+        // const data = React.useState(0);
+        const [counter,modifier] = React.useState(0);
+       /* const counter = data[0];
+        const modifier = data[1];*/
+        return(
+        <div>              
+            <h3>Total clicks : 0</h3>
+            <button>Click me</button>
+        </div>
+    );
+}
+    ReactDOM.render(<App />,root);
+</script>
+</html>
+<!-- reateJS : UI에서 바뀐부분만 업데이트, 생성함. 
+
+    const food = ["tomato","potato"]
+    const [myFavFood, mySecondFavFood] = food;  ==const myFavFood = food[0];
+    myFavFood = tomato
+
+    const x = [1,2,3]
+    const a = x[0];
+    
+    const [a,b,c] = x;
+    c=3
+-->
