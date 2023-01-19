@@ -10,24 +10,45 @@
 
 /*  class,for => Javascript 용어
     className, htmlFor =>JSX
+
+
+(param1, param2, …, paramN) => { statements }
+(param1, param2, …, paramN) => expression
+// 다음과 동일함: => { return expression; }
+
+// 매개변수가 하나뿐인 경우 괄호는 선택사항:
+(singleParam) => { statements }
+singleParam => { statements }
+
+// 매개변수가 없는 함수는 괄호가 필요:
+() => { statements }
 */
     
     function App(){     //데이터 업뎃
-        const [minutes,setMiniutes] = React.useState();
+        const [minutes,setMiniutes] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
         const onChange = (event) =>{
             setMiniutes(event.target.value);
         }
-        return(
+        const reset = () =>setMiniutes(0);
+        const onFlip = () => 
+        {return(
             <div>              
-                <h1>Super Converter</h1>
+                <div>
+                    <h1>Super Converter</h1>
                 <label htmlFor="minutes">Minutes</label>
                 <input value={minutes} id="minutes" placeholder="Minutes" type="number" onChange={onChange}/>
                 <h4>You want to convert {minutes}</h4>
+                    </div>
+                <div>
                 <label htmlFor="hours">Hours</label>
-                <input id="hours" placeholder="Hours" type="number"/>
+                <input value={Math.round( minutes/ 60)} id="hours" placeholder="Hours" type="number"/>
                 </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>Flipped</button>
+            </div>
                 );
-            }
+            }}
     const root = document.getElementById("root");
     ReactDOM.render(<App />,root);
 </script>
