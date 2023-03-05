@@ -1,0 +1,52 @@
+<!-- JSX는 JS를 확장한 문법, 생긴게 HTML과 비슷-->
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+    const root = document.getElementById("root");
+
+/* const h3 = React.createElement("h3",{
+        id:"title",
+        onMouseEnter: () => console.log("mouse enter"),
+    },"Hello I'm a title"); 
+= const Title = <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello I'm a title</h3>*/
+    
+    
+    /*function Title() {
+        return (<h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello I'm a title</h3>
+   );  }  이하 동일*/
+    const Title = () => (<h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello I'm a title</h3>);
+
+
+    /*
+const btn = React.createElement("button",{
+        style: {backgroundColor:"tomato"},
+        onClick: () => console.log('im clicked'),
+    },"Click me");*/
+
+                                 //style은 중괄호 {{2개!}}
+    const Button = () => (<button style={{backgroundColor:"tomato"}} onClick={() => console.log('im clicked')}>Click me</button>);
+            //  = () => ()   ==  function(){return}
+
+    // const container = React.createElement("div",null,[Title,Button]);
+    // ReactDOM.render(container,root);
+
+
+    //Title,Button 요소들을 포함시키려면, function으로 만들어줘야함.
+    //내가 만든 컴포넌트의 첫글자는 반드시 대문자여야함! 소문자면 html 태그라고 생각.
+    // <Title/> == <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello I'm a title</h3>
+    const Container = (<div>
+        <Title/>  
+        <Button/> 
+        </div>);
+    ReactDOM.render(Container,root);
+
+</script>
+</html>
+

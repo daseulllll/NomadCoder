@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    
+    const root = document.getElementById("root");
+  
+    /* 리액트JS에서 데이터를 저장시켜 자동으로 리렌더링=refresh을 일으킬 수 있는 방법
+    let counter = 0;
+    function  countUp(){  
+    }  
+     = const data = React.useState();
+    △console.log(data);하면 
+    [undefined, f ] -> undefined와 함수가 적힌 배열이 나타남
+    (배열 첫번째 값은 초기값, 두번째 값은 그 값을 바꾸는 함수)
+    undefined는 data이고 f는 data를 바꿀 때 사용하는 함수, 주로 앞에 set붙임.
+    React.useState() 함수는 초기값을 설정할 수 있음
+
+     */
+
+    function App(){
+        // const data = React.useState(0);
+        // let [counter,modifier] = React.useState(0);
+        /* const counter = data[0];
+        const modifier = data[1];*/
+
+        let [counter,setCounter] = React.useState(0);
+        
+        const onClick = () =>{
+            // counter = counter + 1;
+            // console.log(counter);
+            setCounter(counter + 1);
+            // counter = 987987987
+            // ReactDOM.render(<App />,root); ==>이 모든게 modifier함수 내에서 일어날거임. 
+            //어떤 값을 부여하던 modifier함수는 그 값으로 업뎃->리렌더링 일으킴.
+        };
+        /*state를 설정하는 방법
+        1. counter = 987987987 처럼 직접 할당
+        2. counter = counter + 1 이전 값을 이용해서 현재 값을 계산해 내는 것.
+        3. 현재 값을 가지고 계산해야한다? -> 함수이용
+        =>      setCounter(current => current + 1);
+                첫번째 arg - 현재 값, return 값 - 새로운 state(현재값을 바탕으로 나올 수 있도록)
+
+            2 & 3 둘 다 현재의 state를 가지고 새로운 값을 계산해 냄. but 3번이 더 안전함.
+        */
+
+        return(
+        <div>              
+            <h3>Total clicks : {counter}</h3>
+            <button onClick={onClick}>Click me</button>
+        </div>
+    );
+}
+    ReactDOM.render(<App />,root);
+</script>
+</html>
+<!-- reateJS : UI에서 바뀐부분만 업데이트, 생성함. 
+
+    const food = ["tomato","potato"]
+    const [myFavFood, mySecondFavFood] = food;  ==const myFavFood = food[0];
+    myFavFood = tomato
+
+    const x = [1,2,3]
+    const a = x[0];
+    
+    const [a,b,c] = x;
+    c=3
+-->

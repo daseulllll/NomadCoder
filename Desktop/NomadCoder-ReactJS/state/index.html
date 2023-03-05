@@ -1,0 +1,44 @@
+<!-- JSX는 JS를 확장한 문법, 생긴게 HTML과 비슷-->
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    
+    const root = document.getElementById("root");
+    let counter = 0;
+    function countUp(){
+        counter = counter+1;
+        render();
+    }
+    function render(){
+        ReactDOM.render(<Container />,root);
+        
+    }
+
+    const Container = ()=>(
+                             //↓innerText와 기능 유사, 변수 연결해주는 것.
+        <div>              
+            <h3>Total clicks : {counter}</h3>
+            <button onClick ={countUp} >Click me</button>
+        </div>
+    );
+
+    /* = function Container() {
+        return(
+                             //↓innerText와 기능 유사, 변수 연결해주는 것.
+        <div>              
+            <h3>Total clicks : {counter}</h3>
+            <button onClick ={countUp} >Click me</button>
+        </div>
+    );
+    }*/
+
+    render();
+</script>
+</html>
+<!-- reateJS : UI에서 바뀐부분만 업데이트, 생성함. -->

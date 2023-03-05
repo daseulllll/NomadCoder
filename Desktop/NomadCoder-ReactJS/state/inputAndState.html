@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+/*  class,for => Javascript 용어
+    className, htmlFor =>JSX
+
+
+(param1, param2, …, paramN) => { statements }
+(param1, param2, …, paramN) => expression
+// 다음과 동일함: => { return expression; }
+
+// 매개변수가 하나뿐인 경우 괄호는 선택사항:
+(singleParam) => { statements }
+singleParam => { statements }
+
+// 매개변수가 없는 함수는 괄호가 필요:
+() => { statements }
+*/
+ 
+    function MinutesToHours(){    
+        // const [minutes,setMiniutes] = React.useState(0);
+        const [amount,setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) =>{
+            setAmount(event.target.value);
+        }
+        const reset = () =>setAmount(0);
+        const onFlip = () => {
+            reset();
+            setFlipped((current) => !current)
+        };
+        {return(
+            <div>              
+                <div>
+                <label htmlFor="minutes">Minutes</label>
+                <input value={flipped ? amount * 60 : amount} id="minutes" placeholder="Minutes" type="number" onChange={onChange} disabled={flipped} /* =disabled={flipped === true}*//>
+                <h4>You want to convert {amount}</h4>
+                    </div>
+                <div>
+                <label htmlFor="hours">Hours</label>
+                <input value={flipped ? amount : Math.round( amount/ 60)}  id="hours" placeholder="Hours" type="number" onChange={onChange} disabled={!flipped} /*=disabled={flipped === false}*//>
+                </div>          
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>{flipped ? "Turn back" : "Invert"}</button>
+            </div>
+                );
+            }}
+   
+    function KmToMiles(){
+        const [ktm , setKtm] = React.useState();
+        const [converted, setConverted] = React.useState(false);
+        const ktmChange =(event) => {
+            setKtm(event.target.value);
+        }
+        const reset =() => setKtm(0);
+        const onConverted = () => {
+            reset();
+            setConverted((current)=>!current)
+        }
+        {return (
+            <div> 
+                <h3>KM 2 M</h3>
+                <div>
+                    <label htmlFor="km">Kilometers</label>
+                    <input value={converted ? ktm * 0.6214 : ktm } id ="km" placeholder="Km" type ="number" onChange={ktmChange} disabled={converted} />
+                </div>
+                <div>
+                    <label htmlFor="mile">Miles</label>
+                    <input value={converted ?  ktm : ktm * 0.6214} id ="mile" placeholder="mile" type ="number" onChange={ktmChange} disabled={!converted} />
+                </div>
+                <button onClick ={reset}>Reset</button>
+                <button onClick ={onConverted}>{converted ? "Turn back" : "Convert" }</button>
+
+            </div>
+            );
+        }
+    }
+
+    function App(){  //▽ item 순서가 중요한거고, 이름은 중요한 것 x
+            //데이터, 데이터를 수정하는 함수 ==> 데이터가 함수에 의해 수정이 되면, ReactJS가 UI를 새로고침!
+        const [index, setIndex] = React.useState("xx");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        };
+        return(           
+                <div>
+                    <h1>Super Converter</h1>
+                    <select value={index} onChange={onSelect}>
+                        <option value="xx"> Select your units </option>
+                        <option value="0"> Minutes & Hours </option>
+                        <option value="1"> Km & Miles </option>
+                    </select>
+                    <hr/>
+                    {index === "xx" ? "Select your units" : null}
+                    {index === "0" ? <MinutesToHours/> : null}
+                    {index === "1" ? <KmToMiles/> : null}
+                </div>
+                );
+            }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />,root);
+</script>
+</html>
+<!--flip funtction : 단위 변환을 뒤집어보는 함
+클릭하면 hours-disalbed, minutes-enabled 
+또 클릭하면 반대 상황됨.(minutes-disabled, hours-enabled)
+-->
+
+<!-- 분할 정복(divide and conquer ) : 컴포넌트 안에 또다른 컴포넌트 렌더링 가능
+App컴포넌트 : root div 그려주는 역할, MinutesToHours /KmToMiles 컴포넌트 렌ㄷㅓ링~-->
+
+
+<!-- <select>는 just HTML!
+
+    function App(){ return (div 내에 
+        {}가 없다면 그냥 text되버림, {중괄호 안에 JS 쓸 수 있음!}  -->
+
+
+<!-- input 有  그 안의 값 바뀜  onChange={onSelect}-> 
+    변화有 -> state update     setIndex(event.target.value)
+    
+컴포넌트가 보이는 것처럼 변함.  {index === "0" ? <MinutesToHours/> : null}
+                              {index === "1" ? <KmToMiles/> : null}
+
+-->
