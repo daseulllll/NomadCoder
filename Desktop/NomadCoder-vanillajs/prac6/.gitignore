@@ -1,0 +1,6 @@
+.cache/
+dist/
+node_modules/
+package-lock.json
+.parcel-cache/
+.parcel-cache/lock.mdb
